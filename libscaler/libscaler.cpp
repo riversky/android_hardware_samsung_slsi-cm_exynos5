@@ -291,11 +291,11 @@ static void rotateValueHAL2SC(unsigned int transform,
         break;
     case HAL_TRANSFORM_FLIP_H | HAL_TRANSFORM_ROT_90:
         *rotate = 90;
-        *vflip = 1; /* set vflip to compensate the rot & flip order. */
+        *hflip = 1; /* set vflip to compensate the rot & flip order. */
         break;
     case HAL_TRANSFORM_FLIP_V | HAL_TRANSFORM_ROT_90:
         *rotate = 90;
-        *hflip = 1; /* set hflip to compensate the rot & flip order. */
+        *vflip = 1; /* set hflip to compensate the rot & flip order. */
         break;
     case HAL_TRANSFORM_FLIP_H:
         *hflip = 1;
