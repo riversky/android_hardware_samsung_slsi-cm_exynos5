@@ -20,8 +20,6 @@
 #include <sys/ioctl.h>
 #include <cutils/log.h>
 
-typedef unsigned long ion_handle;
-
 struct ion_allocation_data {
     size_t len;
     size_t align;
@@ -155,7 +153,7 @@ int ion_sync_fd_partial(ion_client client, ion_buffer buffer, off_t offset, size
     return ioctl(client, ION_IOC_SYNC_PARTIAL, &data);
 }
 
-int ion_incRef(int fd, int share_fd, unsigned long **handle)
+int ion_incRef(int fd, int share_fd, ion_handle *handle)
 {
     struct ion_fd_data data;
 
@@ -165,11 +163,11 @@ int ion_incRef(int fd, int share_fd, unsigned long **handle)
     if (ret < 0)
         return ret;
 
-    *handle = (unsigned long *)(data.handle);
+    *handle = data.handle;
     return ret;
 }
 
-int ion_decRef(int fd, unsigned long *handle)
+int ion_decRef(int fd, ion_handle handle)
 {
     struct ion_handle_data data;
     data.handle = (ion_handle)handle;

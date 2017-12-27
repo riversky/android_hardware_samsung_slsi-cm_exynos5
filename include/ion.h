@@ -84,6 +84,8 @@ typedef int ion_client;
  */
 typedef int ion_buffer;
 
+typedef int ion_handle;
+
 /* ion_client_create()
  * @RETURN: new ion_client.
  *          netative value if creating new ion_client is failed.
@@ -161,9 +163,9 @@ int ion_unmap(void *addr, size_t len);
  */
 int ion_sync(ion_client client, ion_buffer buffer);
 
-int ion_incRef(int fd, int share_fd, unsigned long **handle);
+int ion_incRef(int fd, int share_fd, ion_handle *handle);
 
-int ion_decRef(int fd, unsigned long *handle);
+int ion_decRef(int fd, ion_handle handle);
 
 #ifdef __cplusplus
 }
